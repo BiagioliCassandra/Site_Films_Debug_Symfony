@@ -1,4 +1,4 @@
-<!-- Plus tar on essaierra d'intégrer un formulair de notation sur page -->
+{#Plus tar on essaierra d'intégrer un formulair de notation sur page -->
 <!-- <form>
   <div class="form-group">
     <label for="exampleFormControlInput1">Email address</label>
@@ -28,36 +28,26 @@
     <label for="exampleFormControlTextarea1">Example textarea</label>
     <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
   </div>
-</form> -->
-
-
-
-
-
-
-
-
-
-
-
-
+</form>#}
 
 {% extends 'layout.html.twig' %}
 
-{% block title %}Accueil
+{% block title %}Accueil{% endblock %}
 
-{% block pageTitle %}Accueil
+{% block pageTitle %}Accueil{% endblock %}
 
 {% block main %}
-{% for m in ms %}
-<div class="card" style="width: 18rem;">
-<img class="card-img-top" src="..." alt="Card image cap">
-<div class="card-body">
-<h5 class="card-title">{{ m.title }}</h5>
-<p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-<a href="{{ path("evaluation", {"id" : m.id})}}" class="btn btn-primary">Evaluer</a>
-<a href="{{ path("single", {"id" : m.id})}}" class="btn btn-primary">Voir</a>
-</div>
-</div>
-{% endfor %}
+  {% for movie in movies %}
+    <div class="card" style="width: 18rem;">
+      <img class="card-img-top" src="" alt="Card image cap">
+      <div class="card-body">
+        <h5 class="card-title">{{ movie.title }}</h5>
+        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+        <a href="{{ path('evaluation', {'id' : movie.id}) }}" class="btn btn-primary">Evaluer</a>
+        <a href="{{ path('single', {'id' : movie.id}) }}" class="btn btn-primary">Voir</a>
+      </div>
+    </div>
+  {% endfor %}
 {% endblock %}
+
+
