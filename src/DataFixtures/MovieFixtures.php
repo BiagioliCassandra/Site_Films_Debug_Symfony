@@ -16,7 +16,7 @@ class MovieFixtures extends Fixture
       $faker = Faker\Factory::create('fr_FR');
 
       for ($i=0; $i < 20; $i++) {
-        $movie = new Movie()
+        $movie = new Movie();
         $movie->setTitle($faker->realText($maxNbChars = 50, $indexSize = 1));
         $movie->setSumary($faker>text($maxNbChars = 400));
         $movie->setReleaseYear($faker->date($format = 'd-m-Y', $max = 'now'));
