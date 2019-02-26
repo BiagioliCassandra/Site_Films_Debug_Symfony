@@ -31,20 +31,17 @@
 </form>#}
 
 {% extends 'layout.html.twig' %}
-
 {% block title %}Accueil{% endblock %}
-
 {% block pageTitle %}Accueil{% endblock %}
-
 {% block main %}
   {% for movie in movies %}
-    <div class="card" style="width: 18rem;">
-      <img class="card-img-top" src="" alt="Card image cap">
+    <div class="card">
+      <img class="card-img-top" src="test" alt="test">
       <div class="card-body">
         <h5 class="card-title">{{ movie.title }}</h5>
-        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-        <a href="{{ path('evaluation', {'id' : movie.id}) }}" class="btn btn-primary">Evaluer</a>
-        <a href="{{ path('single', {'id' : movie.id}) }}" class="btn btn-primary">Voir</a>
+        <p class="card-text">{{ movie.sumary }}</p>
+        <a class="btn btn-primary" href="{{ path('evaluation', {'id' : movie.id}) }}">Evaluer</a>
+        <a class="btn btn-primary" href="{{ path('single', {'id' : movie.id}) }}">Voir</a>
       </div>
     </div>
   {% endfor %}
