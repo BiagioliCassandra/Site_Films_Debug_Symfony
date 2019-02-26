@@ -35,8 +35,7 @@
 {% block pageTitle %}Accueil{% endblock %}
 {% block main %}
   {% for movie in movies %}
-    <div class="card">
-      <img class="card-img-top" src="test" alt="test">
+    <div class="card m-5">
       <div class="card-body">
         <h5 class="card-title">{{ movie.title }}</h5>
         <p class="card-text">{{ movie.sumary }}</p>

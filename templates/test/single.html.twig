@@ -5,5 +5,22 @@
 {% block pageTitle %}{{ movie.title }}{% endblock %}
 
 {% block main %}
-
+<div class="d-flex m-5">
+    <div class="card">
+        <div class="card-body">
+        <h5 class="card-title">{{ movie.title }}</h5>
+        <p class="card-text">{{ movie.releaseYear|date("d-m-Y") }}</p>
+        <p class="card-text">{{ movie.sumary }}</p>
+        <p class="card-text">{{ movie.type }}</p>
+        <p class="card-text">{{ movie.author }}</p>
+        <a href="{{ path('index') }}" class="btn btn-primary">Retour</a>
+        </div>
+    </div>
+    <div class="card">
+        {% for evaluation in movie.evaluations %}
+        <p class="card-text">{{ evaluation }}</p>
+        {% endfor %}
+        </div>
+    </div>
+</div>
 {% endblock %}

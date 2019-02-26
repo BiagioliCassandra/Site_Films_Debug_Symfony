@@ -8,7 +8,9 @@ use App\Entity\Movie;
 use App\Entity\Evaluation;
 use App\Entity\User;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 
 
 class TestController extends AbstractController
@@ -51,15 +53,15 @@ class TestController extends AbstractController
     }
 
     /**
-     * @Route("/evaluation/{id}", name="evaluation")
+     * @Route("/evaluation/{id}", name="evaluation", requirements={"id":"\d+"}, methods={"POST", "GET"})
      * @IsGranted("ROLE")
      */
-    public function rate(Movie $movie, User $user, Request $c)
+    public function rate(Movie $movie, User $user, Request $request)
     {
         $rate = new Evaluation();
 
         $form = $this->createFormBuilder($rate)
-            ->add('comment')
+            ->add('comment', TextType::class)
             ->add('grade')
             ->add('sauvegarder', SubmitType::class)
             ->getForm();
