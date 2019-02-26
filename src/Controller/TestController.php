@@ -75,7 +75,7 @@ class TestController extends AbstractController
         }
 
         return $this->render('test/evaluation.html.twig', [
-          "b" => $b,
+          "movie" => $movie,
           "form" => $form->createView()
         ]);
     }
