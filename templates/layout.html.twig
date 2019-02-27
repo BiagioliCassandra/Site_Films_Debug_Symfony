@@ -5,7 +5,10 @@
   <div class="container">
     <h1 class="display-4">Movie Rating</h1>
     <p class="lead">Le premier site français pour évaluer les films tout pourris produits par le cinéma français</p>
-  </div>
+    {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
+    <a class="btn btn-warning text-white my-4" href="{{ path('app_logout') }}">Déconnexion</a>
+    {% endif %}
+    <a class="btn btn-success text-white my-4" href="{{ path('app_login') }}">Connexion</a>
 </div>
 {#<!-- A voir si on intégre ds le futur -->
 <!-- <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
@@ -29,14 +32,11 @@
     <span class="sr-only">Next</span>
   </a>
 </div> -->#}
-<div class="container">
-  <h2>{% block pageTitle %}{% endblock %}</h2>
-</div>
-<div class="jumbotron jumbotron-fluid">
+{% block main %}{% endblock %}
+<div class="jumbotron jumbotron-fluid mb-0">
   <div class="container">
     <p class="lead">Si vous êtes un réalisateur français et que vous vous plaigniez des notes attribuées à votre navet, il ne fallait pas produire une telle bouze. XOXO</p>
   </div>
 </div>
-{% block main %}{% endblock %}
 {% endblock %}
 

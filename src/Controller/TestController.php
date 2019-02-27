@@ -2,33 +2,21 @@
 
 namespace App\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\Routing\Annotation\Route;
 use App\Entity\Movie;
 use App\Entity\Evaluation;
 use App\Entity\User;
-use Symfony\Component\HttpFoundation\Request;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 
 
 class TestController extends AbstractController
 {
-    /**
-     * fonction fète pr tester ds trucs
-     * @Route("/test", name="test")
-     */
-    // public function test()
-    // {
-    //     $ms = $this->getDoctrine()->getRepository(Movie::class)->findAll();
-    //     //fonction qui essé de calc moyen note flm mais prblm
-    //     for ($i=0; $i < count($ms) ; $i) {
-    //       $notes = $ms[$i]->getEvaluations()->getGrade();
-    //     }
-    //     return $this->render('test/index.html.twig', [
-    //       "ms" => $ms
-    //     ]);
-    // }
-
     /**
      * @Route("/", name="index")
      */
@@ -51,27 +39,44 @@ class TestController extends AbstractController
     }
 
     /**
-     * @Route("/evaluation/{id}", name="evaluation")
-     * @IsGranted("ROLE")
+     * @Route("/evaluation/{id}", name="evaluation", methods={"POST", "GET"})
+     * @IsGranted("ROLE_USER")
      */
-    public function rate(Movie $movie, User $user, Request $c)
+    public function rate(Movie $movie, Request $request)
     {
         $rate = new Evaluation();
 
         $form = $this->createFormBuilder($rate)
-            ->add('comment')
-            ->add('grade')
+            ->add('comment', TextareaType::class)
+            ->add('grade', ChoiceType::class, [
+              'choices' => [
+                  '0' => '0',
+                  '1' => '1',
+                  '2' => '2',
+                  '3' => '3',
+                  '4' => '4',
+                  '5' => '5',
+                  '6' => '6',
+                  '7' => '7',
+                  '8' => '8',
+                  '9' => '9',
+                  '10' => '10'
+              ]])  
             ->add('sauvegarder', SubmitType::class)
             ->getForm();
 
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-          $rate.setMovie($movie);
-          $rate.setUser($user);
+          $rate = $form->getData();
+          $user = $this->getUser();
+          $rate->setMovie($movie);
+          $rate->setUser($user);
           $entityManager = $this->getDoctrine()->getManager();
           $entityManager->persist($rate);
           $entityManager->flush();
+
+          return $this->redirectToRoute('index');
         }
 
         return $this->render('test/evaluation.html.twig', [
