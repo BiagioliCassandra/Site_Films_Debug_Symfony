@@ -13,13 +13,12 @@
         <p class="card-text">{{ movie.sumary }}</p>
         <p class="card-text">{{ movie.type }}</p>
         <p class="card-text">{{ movie.author }}</p>
-        <a href="{{ path('index') }}" class="btn btn-primary">Retour</a>
-        </div>
-    </div>
-    <div class="card">
+        <p>Les Notes : </p>
         {% for evaluation in movie.evaluations %}
-        <p class="card-text">{{ evaluation }}</p>
+        <p class="card-text">Note : {{ evaluation.grade }}</p>
+        <p>Commentaire : {{ evaluation.comment }} </p>
         {% endfor %}
+        <a href="{{ path('index') }}" class="btn btn-primary">Retour</a>
         </div>
     </div>
 </div>

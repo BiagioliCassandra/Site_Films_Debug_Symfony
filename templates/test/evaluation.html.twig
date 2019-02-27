@@ -1,9 +1,9 @@
 {% extends 'layout.html.twig' %}
 
 {% block title %}Evaluation{% endblock %}
-
 {% block pageTitle %}Evaluer : {{ movie.title }}{% endblock %}
 
 {% block main %}
+<a href="{{ path('index') }}" class="btn btn-primary">Retour</a>
 {{ form(form) }}
 {% endblock %}

@@ -150,19 +150,14 @@ class Movie
         return $this;
     }
 
-
-
-
-
-
-
-
-
-
-
-
-    // VOIR SI C PAS MIEU DE FAIRE UNE MET DANS L'ENTIT POUR RECUPÉRAR LA NOTE MOYENE
     public function getAverage() {
-
+            //     $ms = $this->getDoctrine()->getRepository(Movie::class)->findAll();
+    //     //fonction qui essé de calc moyen note flm mais prblm
+    //     for ($i=0; $i < count($ms) ; $i) {
+    //       $notes = $ms[$i]->getEvaluations()->getGrade();
+    //     }
+    //     return $this->render('test/index.html.twig', [
+    //       "ms" => $ms
+    //     ]);
     }
 }
