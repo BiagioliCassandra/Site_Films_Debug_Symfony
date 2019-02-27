@@ -12,11 +12,12 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
-use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use Symfony\Component\HttpFoundation\Response;
 
 
 class TestController extends AbstractController
 {
+
     /**
      * @Route("/", name="index")
      */
@@ -31,11 +32,15 @@ class TestController extends AbstractController
     /**
      * @Route("/single/{id}", name="single")
      */
-    public function show(Movie $movie)
+    public function show($id)
     {
-        return $this->render('test/single.html.twig', [
-          "movie" => $movie
-        ]);
+      $movie = $this->getDoctrine()->getRepository(Movie::class)->find($id);
+      $average = $movie->getAverage();
+
+      return $this->render('test/single.html.twig', [
+        "movie" => $movie,
+        "average" => $average 
+      ]);
     }
 
     /**
@@ -50,17 +55,17 @@ class TestController extends AbstractController
             ->add('comment', TextareaType::class)
             ->add('grade', ChoiceType::class, [
               'choices' => [
-                  '0' => '0',
-                  '1' => '1',
-                  '2' => '2',
-                  '3' => '3',
-                  '4' => '4',
-                  '5' => '5',
-                  '6' => '6',
-                  '7' => '7',
-                  '8' => '8',
-                  '9' => '9',
-                  '10' => '10'
+                  '0' => 0,
+                  '1' => 1,
+                  '2' => 2,
+                  '3' => 3,
+                  '4' => 4,
+                  '5' => 5,
+                  '6' => 6,
+                  '7' => 7,
+                  '8' => 8,
+                  '9' => 9,
+                  '10' => 10
               ]])  
             ->add('sauvegarder', SubmitType::class)
             ->getForm();
