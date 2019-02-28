@@ -33,9 +33,17 @@ class TestController extends AbstractController
      * @Route("/single/{id}", name="single")
      */
     public function show($id)
-    {
+    {        
       $movie = $this->getDoctrine()->getRepository(Movie::class)->find($id);
-      $average = $movie->getAverage();
+      $evaluations = $movie->getEvaluations();
+      $average = "Ce film n'a pas encore de notes";
+      
+      foreach($evaluations as $key => $evaluation) {
+        $grade = $evaluation->getGrade();
+        if(!empty($grade))   {
+          $average = $movie->getAverage();
+        }
+      }
 
       return $this->render('test/single.html.twig', [
         "movie" => $movie,

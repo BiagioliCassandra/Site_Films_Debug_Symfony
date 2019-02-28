@@ -8,18 +8,19 @@
 <div class="m-5">
     <div class="card">
         <div class="card-body">
-        <h5 class="card-title">{{ movie.title }}</h5>
-        <p class="card-text">{{ movie.releaseYear|date("d-m-Y") }}</p>
-        <p class="card-text">{{ movie.sumary }}</p>
-        <p class="card-text">{{ movie.type }}</p>
-        <p class="card-text">{{ movie.author }}</p>
-        <p class="card-text">Moyenne des notes : {{ average }}</p>
-        <p>Les Notes : </p>
-        {% for evaluation in movie.evaluations %}
-        <p class="card-text">Note : {{ evaluation.grade }}</p>
-        <p>Commentaire : {{ evaluation.comment }} </p>
-        {% endfor %}
-        <a href="{{ path('index') }}" class="btn btn-primary">Retour</a>
+            <img style="height: 300px; width: 100%; display: block;" src="https://lorempixel.com/540/370/" alt="...">
+            <h5 class="card-title">{{ movie.title }}</h5>
+            <p class="card-text">{{ movie.releaseYear|date("d-m-Y") }}</p>
+            <p class="card-text">{{ movie.sumary }}</p>
+            <p class="card-text">{{ movie.type }}</p>
+            <p class="card-text">{{ movie.author }}</p>
+            <p class="card-text">Moyenne des notes : {{ average }}</p>
+            <p>Les Notes : </p>
+            {% for evaluation in movie.evaluations %}
+                <p class="card-text">Note : {{ evaluation.grade }}</p>
+                <p>Commentaire : {{ evaluation.comment }} </p>
+            {% endfor %}
+            <a href="{{ path('index') }}" class="btn btn-primary">Retour</a>
         </div>
     </div>
 </div>
