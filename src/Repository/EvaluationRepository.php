@@ -19,6 +19,32 @@ class EvaluationRepository extends ServiceEntityRepository
         parent::__construct($registry, Evaluation::class);
     }
 
+    /**
+      * @return Evaluation[] Returns an array of Evaluation objects
+      */
+    public function findFirstGrade()
+    {
+        return $this->createQueryBuilder('e')
+            ->orderBy('e.grade', 'DESC')
+            ->setMaxResults(3)
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
+    /**
+     * @return Evaluation[] Returns an array of Evaluation objects
+     */
+    public function findLastGrade()
+    {
+        return $this->createQueryBuilder('e')
+            ->orderBy('e.grade', 'ASC')
+            ->setMaxResults(3)
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
     // /**
     //  * @return Evaluation[] Returns an array of Evaluation objects
     //  */
