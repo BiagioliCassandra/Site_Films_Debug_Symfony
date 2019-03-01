@@ -1,0 +1,36 @@
+{% extends 'layout.html.twig' %}
+
+{% block title %}{{ movie.title }}{% endblock %}
+
+{% block pageTitle %}{{ movie.title }}{% endblock %}
+
+{% block main %}
+<div class="m-auto w-50">
+    <div class="card">
+        <div class="card-body">
+            <img class="m-auto" style="height: 300px; width: 100%; display: block;" src="https://lorempixel.com/540/370/" alt="...">
+            <h5 class="card-title">Titre : {{ movie.title }}</h5>
+            <p class="card-text">Date de sortie : {{ movie.releaseYear|date("d-m-Y") }}</p>
+            <p class="card-text">{{ movie.sumary }}</p>
+            <p class="card-text">Type : {{ movie.type }}</p>
+            <p class="card-text">Auteur : {{ movie.author }}</p>
+            <p class="card-text">Moyenne des notes : {{ average }}</p>
+            <table class="table">
+                <tbody>
+                  <tr>            
+                    {% for firstGrade in firstGrades %}
+                        <th>Meilleure note : {{ firstGrade.grade }}<br>{{ firstGrade.comment }}</th>
+                    {% endfor %}
+                  </tr>
+                  <tr>            
+                    {% for lastGrade in lastGrades %}
+                        <th>Mauvaise note : {{ lastGrade.grade }}<br>{{ lastGrade.comment }}</th>
+                    {% endfor %}
+                  </tr>
+                </tbody>
+            </table>
+            <a href="{{ path('index') }}" class="btn btn-primary">Retour</a>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -15,7 +15,7 @@ use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\HttpFoundation\Response;
 
 
-class TestController extends AbstractController
+class MovieController extends AbstractController
 {
 
     /**
@@ -24,7 +24,7 @@ class TestController extends AbstractController
     public function index()
     {
         $movies = $this->getDoctrine()->getRepository(Movie::class)->findAll();
-        return $this->render('test/index.html.twig', [
+        return $this->render('movie/index.html.twig', [
           "movies" => $movies
         ]);
     }
@@ -35,6 +35,7 @@ class TestController extends AbstractController
     public function show($id)
     {        
       $movie = $this->getDoctrine()->getRepository(Movie::class)->find($id);
+      
       $evaluations = $movie->getEvaluations();
       $average = "Ce film n'a pas encore de notes";
       
@@ -45,9 +46,19 @@ class TestController extends AbstractController
         }
       }
 
-      return $this->render('test/single.html.twig', [
+      $firstGrades = "";
+      $lastGrades = "";
+
+      if($average !== "Ce film n'a pas encore de notes") {
+        $firstGrades = $this->getDoctrine()->getRepository(Evaluation::class)->findFirstGrade();
+        $lastGrades = $this->getDoctrine()->getRepository(Evaluation::class)->findLastGrade();
+      }
+
+      return $this->render('movie/single.html.twig', [
         "movie" => $movie,
-        "average" => $average 
+        "average" => $average,
+        "firstGrades" => $firstGrades,
+        "lastGrades" => $lastGrades
       ]);
     }
 
@@ -92,7 +103,7 @@ class TestController extends AbstractController
           return $this->redirectToRoute('index');
         }
 
-        return $this->render('test/evaluation.html.twig', [
+        return $this->render('movie/evaluation.html.twig', [
           "movie" => $movie,
           "form" => $form->createView()
         ]);
