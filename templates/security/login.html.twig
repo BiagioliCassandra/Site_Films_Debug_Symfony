@@ -3,20 +3,21 @@
 {% block title %}Connexion!{% endblock %}
 
 {% block main %}
-<form class="w-50 m-auto" method="post">
+<form method="post">
     {% if error %}
         <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
     {% endif %}
 
-    <h1 class="h3 mb-3 font-weight-normal">Merci de vous connecter</h1>
-    <label for="inputUsername" class="sr-only">Identifiant</label>
-    <input type="text" value="{{ last_username }}" name="username" id="inputUsername" class="form-control" placeholder="Nom" required autofocus>
-    <label for="inputPassword" class="sr-only">Password</label>
-    <input type="password" name="password" id="inputPassword" class="form-control" placeholder="Password" required>
-
-    <input type="hidden" name="_csrf_token"
-           value="{{ csrf_token('authenticate') }}"
-    >
+    <h1 class="text-center">Merci de vous connecter</h1>
+    <div class="m-auto w-50">
+        <label for="inputUsername" class="my-3">Identifiant</label>
+        <input type="text" value="{{ last_username }}" name="username" id="inputUsername" class="form-control" placeholder="Nom" required autofocus>
+        <label for="inputPassword" class="my-3">Password</label>
+        <input type="password" name="password" id="inputPassword" class="form-control" placeholder="Password" required>
+    
+        <input type="hidden" name="_csrf_token"
+                value="{{ csrf_token('authenticate') }}"
+        >   
 
     {#
         Uncomment this section and add a remember_me option below your firewall to activate remember me functionality.
@@ -29,6 +30,9 @@
         </div>
     #}
 
-    <button class="btn btn-primary mb-3" type="submit">Se connecter</button>
+        <button class="btn btn-primary my-3" type="submit">Se connecter</button>
+        <a class="btn btn-primary my-2" href="{{ path('index') }}">Voir les films</a>
+        <p>Pas encore de compte? : <a href="{{ path('app_register') }}">S'enregistrer</a></p>
+    </div>  
 </form>
 {% endblock %}

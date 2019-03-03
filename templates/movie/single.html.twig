@@ -19,12 +19,12 @@
                 <tbody>
                   <tr>            
                     {% for firstGrade in firstGrades %}
-                        <th>Meilleure note : {{ firstGrade.grade }}<br>{{ firstGrade.comment }}</th>
+                        <th class="text-success text-center">{{ firstGrade.grade }}<br>{{ firstGrade.comment }}</th>
                     {% endfor %}
                   </tr>
                   <tr>            
                     {% for lastGrade in lastGrades %}
-                        <th>Mauvaise note : {{ lastGrade.grade }}<br>{{ lastGrade.comment }}</th>
+                        <th class="text-danger text-center">{{ lastGrade.grade }}<br>{{ lastGrade.comment }}</th>
                     {% endfor %}
                   </tr>
                 </tbody>

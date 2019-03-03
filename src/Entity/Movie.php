@@ -151,12 +151,11 @@ class Movie
     }
 
     public function getAverage() {
-        for($i = 0; $i < $count = count($this->evaluations); $i++) {
-            foreach($this->evaluations as $key => $evaluation) {
-                $i += $evaluation->getGrade();
-            }
+        $grade = 0;
+        foreach($this->evaluations as $key => $evaluation) {
+            $grade += $evaluation->getGrade();
         }
-        $result = $i / $count;
+        $result = $grade / count($this->evaluations);
         return $result;
     }
 }
