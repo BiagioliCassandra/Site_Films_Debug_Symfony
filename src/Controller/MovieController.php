@@ -64,7 +64,7 @@ class MovieController extends AbstractController
 
     /**
      * @Route("/evaluation/{id}", name="evaluation", methods={"POST", "GET"})
-     * @IsGranted("ROLE_USER")
+     * @IsGranted("ROLE_USER", statusCode=404, message="Vous devrez vous connecter pour pouvoir évaluer les films!")
      */
     public function rate(Movie $movie, Request $request)
     {
